@@ -46,6 +46,52 @@ def secure_upload_file(file):
     
     return filename
 
+
+def evaluate_password_server(pw):
+    """Evaluate password strength on the server side. Returns (score, recommendations).
+    Score is normalized 0..4 (higher is better)."""
+    recommendations = []
+    score = 0
+    if not pw:
+        return 0, ["Enter a password"]
+
+    if len(pw) >= 8:
+        score += 1
+    else:
+        recommendations.append('Make it at least 8 characters long')
+
+    if len(pw) >= 12:
+        score += 1
+
+    if any(c.islower() for c in pw):
+        score += 1
+    else:
+        recommendations.append('Add lowercase letters')
+
+    if any(c.isupper() for c in pw):
+        score += 1
+    else:
+        recommendations.append('Add uppercase letters')
+
+    if any(c.isdigit() for c in pw):
+        score += 1
+    else:
+        recommendations.append('Add digits')
+
+    if any(not c.isalnum() for c in pw):
+        score += 1
+    else:
+        recommendations.append('Add special characters (e.g. !@#$%)')
+
+    lower = pw.lower()
+    common = ['password', '1234', 'qwerty', 'admin', 'letmein', 'iloveyou']
+    if any(c in lower for c in common):
+        recommendations.append('Avoid common words or sequences')
+        score = max(1, score - 2)
+
+    normalized = max(0, min(4, int(score / 1.5)))
+    return normalized, recommendations
+
 @app.route('/')
 def index():
     """Home page - list all recipes"""
@@ -84,6 +130,16 @@ def register():
         
         if User.query.filter_by(email=email).first():
             flash('Email already exists.', 'danger')
+            return redirect(url_for('register'))
+        
+        # Server-side password strength check
+        pw_score, pw_recs = evaluate_password_server(password)
+        # require at least a 'weak' score (2) to proceed
+        if pw_score < 2:
+            msg = 'Password is too weak. '
+            if pw_recs:
+                msg += 'Recommendations: ' + '; '.join(pw_recs[:3])
+            flash(msg, 'danger')
             return redirect(url_for('register'))
         
         # Create new user
