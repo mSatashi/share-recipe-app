@@ -1,0 +1,38 @@
+@"
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment variables
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads (optional - comment if you want to keep uploaded images)
+# uploads/
+"@ | Out-File -FilePath .gitignore -Encoding UTF8
+
+git add .gitignore
+git commit -m "Add .gitignore"
+git push
