@@ -186,9 +186,10 @@ Flask==2.3.3
 Flask-SQLAlchemy==3.0.5
 Flask-Login==0.6.2
 Werkzeug==2.3.7
+argon2-cffi==23.1.0
 python-dotenv==1.0.0
 ```
-**5 dependencies, ~5MB installed**
+**6 dependencies, ~5MB installed**
 
 #### `.env`
 ```

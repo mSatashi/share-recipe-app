@@ -1,8 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
-from werkzeug.security import generate_password_hash, check_password_hash
+from argon2 import PasswordHasher
+from argon2.exceptions import VerifyMismatchError
 from datetime import datetime, timedelta
 from enum import Enum
+
+# Initialize Argon2 password hasher
+pw_hasher = PasswordHasher()
 
 db = SQLAlchemy()
 
@@ -30,14 +34,18 @@ class User(UserMixin, db.Model):
     shared_files = db.relationship('SharedFile', backref='uploader', lazy=True, cascade='all, delete-orphan')
     
     def set_password(self, password):
-        """Hash and set password"""
+        """Hash and set password with Argon2"""
         if len(password) < 8:
             raise ValueError("Password must be at least 8 characters long")
-        self.password_hash = generate_password_hash(password)
+        self.password_hash = pw_hasher.hash(password)
     
     def check_password(self, password):
-        """Check password against hash"""
-        return check_password_hash(self.password_hash, password)
+        """Check password against Argon2 hash"""
+        try:
+            pw_hasher.verify(self.password_hash, password)
+            return True
+        except VerifyMismatchError:
+            return False
     
     def has_role(self, role):
         """Check if user has specific role"""

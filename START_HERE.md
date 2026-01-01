@@ -32,7 +32,7 @@ Visit: **http://localhost:5000**
 
 ✅ **User Management**
 - Secure registration with validation
-- Login with password hashing (Werkzeug)
+- Login with password hashing (Argon2)
 - Session management (7-day timeout)
 - User profiles with statistics
 
@@ -56,7 +56,7 @@ Visit: **http://localhost:5000**
 - 16MB file size limit
 
 ✅ **Security**
-- Password hashing (Werkzeug)
+- Password hashing (Argon2)
 - SQL injection prevention (SQLAlchemy ORM)
 - CSRF protection ready
 - HTTPOnly and Secure cookies
@@ -140,7 +140,7 @@ Upload → Validate → Sanitize Filename → Store Securely → Download
 - **Framework:** Flask 2.3.3
 - **Database:** SQLite (SQLAlchemy ORM)
 - **Authentication:** Flask-Login
-- **Security:** Werkzeug (password hashing)
+- **Security:** Argon2 (password hashing)
 - **Frontend:** Bootstrap 5
 - **Templating:** Jinja2
 
@@ -182,7 +182,7 @@ Upload → Validate → Sanitize Filename → Store Securely → Download
 
 ## 🔐 Security Highlights
 
-- **Passwords:** Hashed with Werkzeug (never stored in plain text)
+- **Passwords:** Hashed with Argon2 (never stored in plain text)
 - **Files:** Random filenames, type whitelist, size limits
 - **Database:** SQL injection prevention (ORM)
 - **Sessions:** HTTPOnly cookies, 7-day timeout
@@ -307,6 +307,6 @@ This project is free to use and modify.
 
 ---
 
-**Built with Flask | Secured with Werkzeug | Documented Completely**
+**Built with Flask | Secured with Argon2 | Documented Completely**
 
 Last Updated: December 2024

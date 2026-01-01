@@ -148,7 +148,7 @@ Manage employees and oversee system
 - [x] User profile with stats
 
 ### ✅ Security
-- [x] Password hashing (Werkzeug)
+- [x] Password hashing (Argon2)
 - [x] Password strength validation
 - [x] Failed login attempt tracking
 - [x] Account lockout (15 minutes)

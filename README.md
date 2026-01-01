@@ -11,7 +11,7 @@ A secure web application for sharing food recipes built with Python Flask.
   - Password must be at least 8 characters
   
 - **Login**: Secure login with password hashing
-  - Passwords hashed using Werkzeug security
+  - Passwords hashed using Argon2 security
   - Session-based authentication
   - Remember me functionality
   
@@ -109,7 +109,7 @@ The app will be available at: **http://localhost:5000**
 - `id`: Primary key
 - `username`: Unique username (min 3 chars)
 - `email`: Unique email address
-- `password_hash`: Hashed password (using Werkzeug)
+- `password_hash`: Hashed password (using Argon2)
 - `created_at`: Account creation timestamp
 
 ### Recipe Model
@@ -135,7 +135,7 @@ The app will be available at: **http://localhost:5000**
 ## Security Features
 
 ### Password Security
-- Passwords hashed using Werkzeug `generate_password_hash()`
+- Passwords hashed using Argon2 algorithm
 - Minimum 8 characters required
 - Never stored in plain text
 
@@ -221,7 +221,7 @@ if not User.query.filter_by(username='testuser').first():
 - **Flask** 2.3.3 - Web framework
 - **Flask-SQLAlchemy** 3.0.5 - ORM and database
 - **Flask-Login** 0.6.2 - User session management
-- **Werkzeug** 2.3.7 - WSGI utilities and password hashing
+- **argon2-cffi** 23.1.0 - Password hashing
 - **python-dotenv** 1.0.0 - Environment variable management
 
 ## Usage Examples

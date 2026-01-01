@@ -16,7 +16,7 @@ A complete, production-ready Python Flask web application for sharing food recip
 - ✅ Mobile responsive design
 
 ### Security Features Implemented
-- ✅ **Password Security**: Werkzeug password hashing (min 8 chars)
+- ✅ **Password Security**: Argon2 password hashing (min 8 chars)
 - ✅ **Session Management**: 7-day timeout, HTTPOnly cookies, CSRF ready
 - ✅ **File Security**: Random filenames, type whitelist, size limits
 - ✅ **Input Validation**: Server-side validation, SQL injection prevention
@@ -83,7 +83,7 @@ python app.py
 
 ### ✅ User Management
 - [x] Register (3+ char username, 8+ char password, unique email)
-- [x] Login (password hashing with Werkzeug)
+- [x] Login (password hashing with Argon2)
 - [x] Logout
 - [x] Session handling (7-day timeout)
 - [x] User profile with stats
@@ -158,13 +158,19 @@ CREATE TABLE comment (
 
 ### Password Hashing
 ```python
-from werkzeug.security import generate_password_hash, check_password_hash
+from argon2 import PasswordHasher
+
+pw_hasher = PasswordHasher()
 
 # Hashing
-hash = generate_password_hash(password)
+hash = pw_hasher.hash(password)
 
 # Checking
-is_valid = check_password_hash(hash, password)
+try:
+    pw_hasher.verify(hash, password)
+    is_valid = True
+except VerifyMismatchError:
+    is_valid = False
 ```
 
 ### Session Security
@@ -264,7 +270,7 @@ See `ROUTES.md` for complete reference.
 | Flask | 2.3.3 | Web framework |
 | Flask-SQLAlchemy | 3.0.5 | ORM |
 | Flask-Login | 0.6.2 | Authentication |
-| Werkzeug | 2.3.7 | Password hashing |
+| argon2-cffi | 23.1.0 | Password hashing |
 | SQLite | - | Database |
 | Bootstrap 5 | CDN | UI Framework |
 | Jinja2 | Built-in | Template engine |

@@ -19,7 +19,7 @@ All features requested have been implemented and tested.
 
 - [x] **Login Feature**
   - Username/password authentication
-  - **Password hashing** using Werkzeug `generate_password_hash()`
+  - **Password hashing** using Argon2
   - Session handling (7-day timeout)
   - Remember me functionality
   - Route: `GET/POST /login`
@@ -94,10 +94,10 @@ All features requested have been implemented and tested.
 ## 🔐 Security Features - All Implemented
 
 ### Password Security ✅
-- [x] Passwords **hashed with Werkzeug**
+- [x] Passwords **hashed with Argon2**
   - Function: `User.set_password(password)`
   - Code: `models.py` lines 21-24
-  - Hashing: `generate_password_hash(password)`
+  - Hashing: `pw_hasher.hash(password)`
   - Checking: `check_password_hash(self.password_hash, password)`
   - Minimum 8 characters enforced
   - Never stored in plain text
@@ -314,7 +314,7 @@ Total Files: **21**
 - [x] **Flask 2.3.3** - Web framework
 - [x] **Flask-SQLAlchemy 3.0.5** - ORM
 - [x] **Flask-Login 0.6.2** - Authentication
-- [x] **Werkzeug 2.3.7** - Password hashing
+- [x] **argon2-cffi 23.1.0** - Password hashing
 - [x] **SQLite** - Database
 - [x] **Bootstrap 5** - UI framework
 - [x] **Jinja2** - Template engine

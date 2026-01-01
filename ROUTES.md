@@ -365,7 +365,7 @@ Messages auto-dismiss with Bootstrap alert close button.
 
 ### Authentication Routes
 - ✅ Password validation (min 8 chars, strong)
-- ✅ Password hashing (Werkzeug)
+- ✅ Password hashing (Argon2)
 - ✅ Duplicate username/email check
 - ✅ Session timeout (7 days)
 - ✅ HTTPOnly cookies
