@@ -25,6 +25,7 @@
                     </ul>
 
                     <form method="POST" action="{{ url_for('delete_account') }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <div class="mb-3">
                             <label for="password" class="form-label">Confirm Your Password</label>
                             <input type="password" class="form-control" id="password" 

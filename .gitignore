@@ -31,7 +31,8 @@ __pycache__/
 Thumbs.db
 
 # Uploads (optional - comment if you want to keep uploaded images)
-# uploads/
+uploads/
+
 # "@ | Out-File -FilePath .gitignore -Encoding UTF8
 
 # git add .gitignore

@@ -98,6 +98,7 @@
                                             <form method="POST" 
                                                   action="{{ url_for('reset_username_permission', employee_id=employee.id) }}" 
                                                   style="display:inline;">
+                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                                                 <button type="submit" class="btn btn-sm btn-info">
                                                     Reset Username
                                                 </button>

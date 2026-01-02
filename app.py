@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, send_file, jsonify
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from flask_wtf.csrf import CSRFProtect
 from werkzeug.utils import secure_filename
 from models import db, User, Recipe, Comment, SharedFile, UserRole
 from config import config
@@ -10,6 +11,8 @@ import secrets
 
 app = Flask(__name__)
 app.config.from_object(config['development'])
+
+csrf = CSRFProtect(app)
 
 # Initialize extensions
 db.init_app(app)

@@ -12,6 +12,7 @@
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ url_for('share_file') }}" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <div class="mb-3">
                             <label for="description" class="form-label">Recipe Description</label>
                             <textarea class="form-control" id="description" name="description" 
