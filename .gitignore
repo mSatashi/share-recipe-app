@@ -8,6 +8,7 @@ ENV/
 *.db
 *.sqlite
 *.sqlite3
+instance/recipe_app.db
 
 # Python
 __pycache__/
@@ -31,8 +32,8 @@ Thumbs.db
 
 # Uploads (optional - comment if you want to keep uploaded images)
 # uploads/
-"@ | Out-File -FilePath .gitignore -Encoding UTF8
+# "@ | Out-File -FilePath .gitignore -Encoding UTF8
 
-git add .gitignore
-git commit -m "Add .gitignore"
-git push
+# git add .gitignore
+# git commit -m "Add .gitignore"
+# git push

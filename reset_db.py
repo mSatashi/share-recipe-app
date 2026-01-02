@@ -31,7 +31,8 @@ def reset_database():
             email='admin@example.com',
             role=UserRole.ADMIN.value
         )
-        admin_user.set_password('admin1234')
+        admin_pass = os.environ.get('ADMIN_PASSWORD') or 'ADD_THE_PASSWORD_IN_ENV_FILE'
+        admin_user.set_password(admin_pass)
         db.session.add(admin_user)
         
         # Create a test employee
@@ -40,7 +41,8 @@ def reset_database():
             email='employee@example.com',
             role=UserRole.EMPLOYEE.value
         )
-        employee_user.set_password('employee1234')
+        employee_pass = os.environ.get('EMPLOYEE_PASSWORD') or 'ADD_THE_PASSWORD_IN_ENV_FILE'
+        employee_user.set_password(employee_pass)
         db.session.add(employee_user)
         
         db.session.commit()
