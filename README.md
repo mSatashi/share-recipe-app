@@ -165,7 +165,7 @@ The app will be available at: **http://localhost:5000**
 ### Input Validation
 - Form validation on both client and server side
 - SQL injection prevention (SQLAlchemy ORM)
-- CSRF protection with Flask-WTF (can be added)
+- CSRF protection with Flask-WTF
 - XSS prevention with template auto-escaping
 
 ### Database Security
