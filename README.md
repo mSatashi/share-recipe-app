@@ -89,14 +89,25 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Initialize Database
+### 4. Configuration
+Duplicate the example environment file to create your local configuration.
 ```bash
-python app.py
+# Windows
+copy .env.example .env
+
+# Mac/Linux
+cp .env.example .env
 ```
 
-The app will create `recipe_app.db` automatically on first run.
+Open .env file and update the Admin and Employee password.
 
-### 5. Run the Application
+### 5. Initialize Database
+Run the reset script to create the database and seed initial users (Admin, Demo, Employee).
+```bash
+python reset_db.py
+```
+
+### 6. Run the Application
 ```bash
 python app.py
 ```

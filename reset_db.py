@@ -5,6 +5,9 @@ import os
 import sys
 from app import app, db
 from models import User, UserRole
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def reset_database():
     """Drop all tables and recreate them"""
@@ -31,7 +34,12 @@ def reset_database():
             email='admin@example.com',
             role=UserRole.ADMIN.value
         )
-        admin_user.set_password('admin1234')
+        admin_pass = os.environ.get('ADMIN_PASSWORD')
+        if not admin_pass:
+            print("❌ ERROR: 'ADMIN_PASSWORD' variable cannot be found in .env file!")
+            print("   Please copy .env.example to make the .env file and fill the password.")
+            sys.exit(1)
+        admin_user.set_password(admin_pass)
         db.session.add(admin_user)
         
         # Create a test employee
@@ -40,7 +48,12 @@ def reset_database():
             email='employee@example.com',
             role=UserRole.EMPLOYEE.value
         )
-        employee_user.set_password('employee1234')
+        employee_pass = os.environ.get('EMPLOYEE_PASSWORD')
+        if not employee_pass:
+            print("❌ ERROR: 'EMPLOYEE_PASSWORD' variable cannot be found in .env file!")
+            print("   Please copy .env.example to make the .env file and fill the password.")
+            sys.exit(1)
+        employee_user.set_password(employee_pass)
         db.session.add(employee_user)
         
         db.session.commit()
